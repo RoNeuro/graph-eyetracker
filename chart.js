@@ -1,3 +1,5 @@
+var charts=[];
+
 function generateChartData(data) {
     var chartData = [];
     var benchAmptitude = 0;
@@ -7,7 +9,7 @@ function generateChartData(data) {
     for (var i = 0; i < data.length; i++) {
         benchAmptitude = data[i][1];
         amptitude = data[i][2];
-        time = data[i][0]
+        time = data[i][0];
 
         chartData.push({
             time: time,
@@ -18,7 +20,7 @@ function generateChartData(data) {
     var chart = AmCharts.makeChart("sacade", {
         "type": "serial",
         "theme": "light",
-        "mouseWheelZoomEnabled": true,
+        "mouseWheelZoomEnabled": false,
         "legend": {
             "useGraphSettings": true,
             "position": "right",
@@ -31,12 +33,6 @@ function generateChartData(data) {
             'axisThickness': 2,
             'axisAlpha': 1,
             'position': 'left'
-        }, {
-            "id": "v2",
-            "axisColor": "#0000ff",
-            "axisThickness": 2,
-            "axisAlpha": 1,
-            "position": "right"
         }],
         "graphs": [{
             "valueAxis": "v1",
@@ -49,7 +45,7 @@ function generateChartData(data) {
             "fillAlphas": 0
         },
             {
-                "valueAxis": "v2",
+                "valueAxis": "v1",
                 "lineColor": "#0000ff",
                 "bullet": "square",
                 "bulletBorderThickness": 2,
@@ -58,15 +54,12 @@ function generateChartData(data) {
                 "valueField": "amptitude",
                 "fillAlphas": 0
             }],
-        "chartScrollbar": {},
         "chartCursor": {
-            "pan": true,
             "valueLineEnabled": true,
             "valueLineBalloonEnabled": true,
             "cursorAlpha": 1,
             "cursorColor": "#258cbb",
             "valueLineAlpha": 0.2,
-            "valueZoomable": true
         },
         "categoryField": "time",
         "categoryAxis": {
@@ -87,24 +80,13 @@ function generateChartData(data) {
             "size": 15,
             "text": "Sacade"
         }],
-        "valueScrollbar": {
-            "oppositeAxis": true,
-            "offset": 50,
-            "scrollbarHeight": 10
+        "chartScrollbar": {
+
         },
-        // "listeners": [{
-        // 	"event": "rendered",
-        // 	"method": function(e){
-        // 		e.chart.valueAxes[0].zoomToValues(-10, 10);
-        // 	}
-        // }]
     });
 
-    // chart.addListener("rendered", zoomChart);
-    // zoomChart();
 
-
-    console.log("chart", data);
+    charts.push(chart);
 }
 
 
@@ -141,12 +123,6 @@ function generateFixedChartData(data) {
             'axisThickness': 2,
             'axisAlpha': 1,
             'position': 'left'
-        }, {
-            "id": "v2",
-            "axisColor": "#0000ff",
-            "axisThickness": 2,
-            "axisAlpha": 1,
-            "position": "right"
         }],
         "graphs": [{
             "valueAxis": "v1",
@@ -159,7 +135,7 @@ function generateFixedChartData(data) {
             "fillAlphas": 0
         },
             {
-                "valueAxis": "v2",
+                "valueAxis": "v1",
                 "lineColor": "#0000ff",
                 "bullet": "square",
                 "bulletBorderThickness": 2,
@@ -168,15 +144,15 @@ function generateFixedChartData(data) {
                 "valueField": "amptitude",
                 "fillAlphas": 0
             }],
-        "chartScrollbar": {},
+        "chartScrollbar": {
+
+        },
         "chartCursor": {
-            "pan": true,
             "valueLineEnabled": true,
             "valueLineBalloonEnabled": true,
             "cursorAlpha": 1,
             "cursorColor": "#258cbb",
             "valueLineAlpha": 0.2,
-            "valueZoomable": true
         },
         "categoryField": "time",
         "categoryAxis": {
@@ -195,18 +171,13 @@ function generateFixedChartData(data) {
         },
         "titles": [{
             "size": 15,
-            "text": "Fixation Point"
+            "text": "Fixation Point X"
         }],
-        "valueScrollbar": {
-            "oppositeAxis": true,
-            "offset": 50,
-            "scrollbarHeight": 10
-        },
-
     });
+    charts.push(chart);
 }
 
-function generateGazePoint(data) {
+function generateGazePointX(data) {
     var chartData = [];
     var benchAmptitude = 0;
     var amptitude = 0;
@@ -223,7 +194,7 @@ function generateGazePoint(data) {
             amptitude: amptitude
         });
     }
-    var chart = AmCharts.makeChart("gazePoint", {
+    var chart = AmCharts.makeChart("gazePointx", {
         "type": "serial",
         "theme": "light",
         "mouseWheelZoomEnabled": true,
@@ -239,12 +210,6 @@ function generateGazePoint(data) {
             'axisThickness': 2,
             'axisAlpha': 1,
             'position': 'left'
-        }, {
-            "id": "v2",
-            "axisColor": "#0000ff",
-            "axisThickness": 2,
-            "axisAlpha": 1,
-            "position": "right"
         }],
         "graphs": [{
             "valueAxis": "v1",
@@ -257,7 +222,7 @@ function generateGazePoint(data) {
             "fillAlphas": 0
         },
             {
-                "valueAxis": "v2",
+                "valueAxis": "v1",
                 "lineColor": "#0000ff",
                 "bullet": "square",
                 "bulletBorderThickness": 2,
@@ -268,13 +233,11 @@ function generateGazePoint(data) {
             }],
         "chartScrollbar": {},
         "chartCursor": {
-            "pan": true,
             "valueLineEnabled": true,
             "valueLineBalloonEnabled": true,
             "cursorAlpha": 1,
             "cursorColor": "#258cbb",
             "valueLineAlpha": 0.2,
-            "valueZoomable": true
         },
         "categoryField": "time",
         "categoryAxis": {
@@ -293,13 +256,141 @@ function generateGazePoint(data) {
         },
         "titles": [{
             "size": 15,
-            "text": "Fixation Point"
+            "text": "Gaze Point X"
         }],
-        "valueScrollbar": {
-            "oppositeAxis": true,
-            "offset": 50,
-            "scrollbarHeight": 10
-        },
-
     });
+    charts.push(chart);
+}
+function generateGazePointY(data) {
+    var chartData = [];
+    var benchAmptitude = 0;
+    var amptitude = 0;
+    var time = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        benchAmptitude = data[i][1];
+        amptitude = data[i][2];
+        time = data[i][0];
+
+        chartData.push({
+            time: time,
+            benchAmptitude: benchAmptitude,
+            amptitude: amptitude
+        });
+    }
+    var chart = AmCharts.makeChart("gazePointy", {
+        "type": "serial",
+        "theme": "light",
+        "mouseWheelZoomEnabled": true,
+        "legend": {
+            "useGraphSettings": true,
+            "position": "right",
+        },
+        "dataProvider": chartData,
+        "synchronizeGrid": true,
+        "valueAxes": [{
+            'id': 'v1',
+            'axisColor': '#FF6600',
+            'axisThickness': 2,
+            'axisAlpha': 1,
+            'position': 'left',
+            includeGuidesInMinMax:true,
+            guides:[
+                {
+                    "fillAlpha": 0,
+                    "value": 400
+                },
+                {
+                    "fillAlpha": 0,
+                    "value": 700
+                }
+            ]
+        }],
+        "graphs": [{
+            "valueAxis": "v1",
+            "lineColor": "#FF6600",
+            "bullet": "round",
+            "bulletBorderThickness": 2,
+            "hideBulletsCount": 30,
+            "title": "benchmark",
+            "valueField": "benchAmptitude",
+            "fillAlphas": 0
+        },
+            {
+                "valueAxis": "v1",
+                "lineColor": "#0000ff",
+                "bullet": "square",
+                "bulletBorderThickness": 2,
+                "hideBulletsCount": 30,
+                "title": "patient",
+                "valueField": "amptitude",
+                "fillAlphas": 0
+            }],
+        "chartScrollbar": {},
+        "chartCursor": {
+            "valueLineEnabled": true,
+            "valueLineBalloonEnabled": true,
+            "cursorAlpha": 1,
+            "cursorColor": "#258cbb",
+            "valueLineAlpha": 0.2,
+        },
+        "categoryField": "time",
+        "categoryAxis": {
+            "gridPosition": "start",
+        },
+        "export": {
+            "enabled": true,
+            "postion": "bottom-right"
+        },
+        "marginRight": 40,
+        "marginLeft": 40,
+        "autoMarginOffset": 20,
+        "balloon": {
+            "borderThickness": 1,
+            "shadowAlpha": 0
+        },
+        "titles": [{
+            "size": 15,
+            "text": "Gaze Point Y"
+        }],
+    });
+    charts.push(chart);
+    for (var x in charts) {
+        charts[x].addListener("zoomed", syncZoom);
+        charts[x].addListener("init", addCursorListeners);
+    }
+}
+
+function addCursorListeners(event) {
+    event.chart.chartCursor.addListener("changed", handleCursorChange);
+    event.chart.chartCursor.addListener("onHideCursor", handleHideCursor);
+}
+
+function syncZoom(event) {
+    for (x in charts) {
+        if (charts[x].ignoreZoom) {
+            charts[x].ignoreZoom = false;
+        }
+        if (event.chart != charts[x]) {
+            charts[x].ignoreZoom = true;
+            charts[x].zoomToCategoryValues(event.startValue, event.endValue);
+        }
+    }
+}
+
+function handleCursorChange(event) {
+    for (var x in charts) {
+        if (event.chart != charts[x]) {
+            charts[x].chartCursor.syncWithCursor(event.chart.chartCursor);
+        }
+    }
+}
+
+function handleHideCursor() {
+    for (var x in charts) {
+        if (charts[x].chartCursor.hideCursor) {
+            charts[x].chartCursor.forceShow = false;
+            charts[x].chartCursor.hideCursor(false);
+        }
+    }
 }

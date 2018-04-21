@@ -1,6 +1,5 @@
 $(document).ready(function () {
     var reader;
-    var progress = document.querySelector('.percent');
     function abortRead() {
         reader.abort();
     }
@@ -20,36 +19,14 @@ $(document).ready(function () {
         }
     }
 
-    function updateProgress(evt) {
-        // evt is an ProgressEvent.
-        if (evt.lengthComputable) {
-            var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-            // Increase the progress bar length.
-            if (percentLoaded < 100) {
-                progress.style.width = percentLoaded + '%';
-                progress.textContent = percentLoaded + '%';
-            }
-        }
-    }
     function handleFileSelect(evt) {
-        // Reset progress indicator on new file selection.
-        progress.style.width = '0%';
-        progress.textContent = '0%';
 
         reader = new FileReader();
         reader.onerror = errorHandler;
-        reader.onprogress = updateProgress;
         reader.onabort = function (e) {
             alert('File read cancelled');
         };
-        reader.onloadstart = function (e) {
-            document.getElementById('progress_bar').className = 'loading';
-        };
         reader.onload = function (e) {
-            // Ensure that the progress bar displays 100% at the end.
-            progress.style.width = '100%';
-            progress.textContent = '100%';
-            setTimeout("document.getElementById('progress_bar').className='';", 2000);
             var text = reader.result;
             stimuliArray = text.split('\n').map(function (ln) {
                 return ln.split('\t');
@@ -126,15 +103,16 @@ $(document).ready(function () {
                     }
 
                     arrayForGraph.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), numberFromMediaName, initialSaccadicAmplitude]);
-                    arrayFixationPointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), initialFixationPoint, refValForPx]);
-                    arrayGazePointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), refValForPx]);
-                    arrayGazePointY.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), 540]);
+                    arrayFixationPointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]),refValForPx, initialFixationPoint ]);
+                    arrayGazePointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]),refValForPx, parseInt(stimuliArray[i][numberGazePointX]) ]);
+                    arrayGazePointY.push([parseInt(stimuliArray[i][numberRecordingTimestamp]),540, parseInt(stimuliArray[i][numberGazePointY]) ]);
                     initial = false;
                 }
             }
             generateChartData(arrayForGraph);
             generateFixedChartData(arrayFixationPointX);
-            generateGazePoint(arrayGazePointX);
+            generateGazePointX(arrayGazePointX);
+            generateGazePointY(arrayGazePointY);
         };
         reader.readAsBinaryString(evt.target.files[0]);
     }
