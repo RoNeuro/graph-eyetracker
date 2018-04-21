@@ -295,6 +295,7 @@ function generateGazePointY(data) {
             'axisAlpha': 1,
             'position': 'left',
             includeGuidesInMinMax:true,
+            reversed:true,
             guides:[
                 {
                     "fillAlpha": 0,
