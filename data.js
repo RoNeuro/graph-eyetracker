@@ -135,10 +135,8 @@ $(document).ready(function () {
             generateChartData(arrayForGraph);
         };
         reader.readAsBinaryString(evt.target.files[0]);
-
-        document.getElementById('files').addEventListener('change', handleFileSelect, false);
     }
-
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
 });
 
 
