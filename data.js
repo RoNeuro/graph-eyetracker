@@ -133,6 +133,8 @@ $(document).ready(function () {
                 }
             }
             generateChartData(arrayForGraph);
+            generateFixedChartData(arrayFixationPointX);
+            generateGazePoint(arrayGazePointX);
         };
         reader.readAsBinaryString(evt.target.files[0]);
     }
