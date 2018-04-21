@@ -1,0 +1,74 @@
+<head>
+    <link rel="stylesheet" href="chartPageStyle.css">
+</head>
+
+<body>
+  <style>
+    #progress_bar {
+      margin: 10px 0;
+      padding: 3px;
+      border: 1px solid #000;
+      font-size: 14px;
+      clear: both;
+      opacity: 0;
+      -moz-transition: opacity 1s linear;
+      -o-transition: opacity 1s linear;
+      -webkit-transition: opacity 1s linear;
+    }
+    #progress_bar.loading {
+      opacity: 1.0;
+    }
+    #progress_bar .percent {
+      background-color: #99ccff;
+      height: auto;
+      width: 0;
+    }
+    </style>
+    
+    <div id="mare">
+        <div id="container">
+
+            <header>
+                <br/>
+               <img src="https://www.roneuro.ro/images/photos/RoNeuro---Logo.png" alt="RoNeuro" >
+  <button class="button_logout" type button> Logout</button>
+ 
+            </header>
+
+            
+              <br/>
+                <div class= "buttons_bar">
+      <button class= "button1">Home</button>
+                  <button class= "button2">Import</button>
+                  <button class= "button3">Istoric</button>
+                   
+                 </div>
+                <input type="file" id="files" name="file" />
+                <button onclick="abortRead();">Cancel read</button>
+                <div id="progress_bar"><div class="percent">0%</div></div>
+
+              
+              <div id="chartdiv">
+
+              </div>
+
+                                <footer>
+                    <br/>Copyright &copy 2018
+                </footer>
+            </div>
+        </div>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="chart.js"></script>
+</body>
+
+</html>
