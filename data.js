@@ -58,10 +58,16 @@ $(document).ready(function(){
 //       console.log(ln); 
       return ln.split('\t');
     });
-     
+  var ref = {
+    '18': 1780,
+    '-18': 150,
+    '10': 1360,
+    '-10': 550,
+    '0': 960
+  };
     console.log(stimuliArray);
       
- for (var i= 0; i < stimuliArray[0].length; i++){
+    for (var i= 0; i < stimuliArray[0].length; i++){
       if (stimuliArray[0][i] === "MediaName"){
         var numberMediaName = i;
       }else if (stimuliArray[0][i] === "RecordingTimestamp"){
@@ -74,16 +80,26 @@ $(document).ready(function(){
         var numberValidityLeft = i;
       }else if (stimuliArray[0][i] === "ValidityRight"){
         var numberValidityRight = i;
-      } 
+      }else if (stimuliArray[0][i] === "GazePointX (MCSpx)"){
+        var numberGazePointX = i;
+      }else if (stimuliArray[0][i] === "GazePointY (MCSpx)"){
+        var numberGazePointY = i;
+      }
     } 
     console.log(numberMediaName, numberRecordingTimestamp, numberFixationPointX, numberSaccadicAmplitude, numberValidityLeft, numberValidityRight);
       
     var arrayForGraph = [];
+    var arrayFixationPointX = [];
+    var arrayGazePointX = [];
+    var arrayGazePointY = [];
     var initialMediaName = 0;
     var initialFixationPoint = 0;
     var initialSaccadicAmplitude = 0.0;
-var numberFromMediaName;
+    var numberFromMediaName;
+    var refValForPx = 0;
+//     var initial
     for (var i=0; i < stimuliArray.length; i++){
+      
       if (stimuliArray[i][numberMediaName] !== "" && stimuliArray[i][numberMediaName] !== undefined && ((stimuliArray[i][numberValidityLeft] == 0 && stimuliArray[i][numberValidityRight] == 0) || (stimuliArray[i][numberValidityLeft] == 4 && stimuliArray[i][numberValidityRight] == 4))){
         //Media Name Number
         if (stimuliArray[i][numberMediaName] === "black.bmp") {
@@ -91,27 +107,30 @@ var numberFromMediaName;
         } else if (stimuliArray[i][numberMediaName] === "O.bmp") {
           numberFromMediaName = 0;
           initialMediaName = numberFromMediaName;
+          refValForPx = ref['0'];
         } else {
           numberFromMediaName = parseInt(stimuliArray[i][numberMediaName].replace(/[^0-9+-]/g,""));
           initialMediaName = numberFromMediaName;
+          refValForPx = ref[numberFromMediaName+""];
         }
         //Saccadic Amplitude Number
         var floatSaccadicAmplitude = parseFloat(stimuliArray[i][numberSaccadicAmplitude].replace(",","."));
         if (parseInt(stimuliArray[i][numberFixationPointX]) < initialFixationPoint) {
           initialSaccadicAmplitude -= floatSaccadicAmplitude;
           initialSaccadicAmplitude=parseFloat(initialSaccadicAmplitude.toFixed(2))
-          initialFixationPoint = stimuliArray[i][numberFixationPointX];
+          initialFixationPoint = parseInt(stimuliArray[i][numberFixationPointX]);
         } else if (parseInt(stimuliArray[i][numberFixationPointX]) > initialFixationPoint) {
           initialSaccadicAmplitude += floatSaccadicAmplitude;
           initialSaccadicAmplitude=parseFloat(initialSaccadicAmplitude.toFixed(2))
-          initialFixationPoint = stimuliArray[i][numberFixationPointX];
+          initialFixationPoint = parseInt(stimuliArray[i][numberFixationPointX]);
         }
         
         arrayForGraph.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), numberFromMediaName, initialSaccadicAmplitude]);
-      }      
-    }
-    console.log(arrayForGraph);
-generateChartData(arrayForGraph);
+        arrayFixationPointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), initialFixationPoint, refValForPx]);
+        arrayGazePointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), refValForPx]);
+        arrayGazePointY.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), 540]);
+    	console.log(arrayForGraph);
+	generateChartData(arrayForGraph);
 //create chart! 
 
 	
