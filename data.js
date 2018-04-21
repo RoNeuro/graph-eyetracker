@@ -97,7 +97,7 @@ $(document).ready(function(){
     var initialSaccadicAmplitude = 0.0;
     var numberFromMediaName;
     var refValForPx = 0;
-//     var initial
+    var initial=true;
     for (var i=0; i < stimuliArray.length; i++){
       
       if (stimuliArray[i][numberMediaName] !== "" && stimuliArray[i][numberMediaName] !== undefined && ((stimuliArray[i][numberValidityLeft] == 0 && stimuliArray[i][numberValidityRight] == 0) || (stimuliArray[i][numberValidityLeft] == 4 && stimuliArray[i][numberValidityRight] == 4))){
@@ -115,6 +115,10 @@ $(document).ready(function(){
         }
         //Saccadic Amplitude Number
         var floatSaccadicAmplitude = parseFloat(stimuliArray[i][numberSaccadicAmplitude].replace(",","."));
+	if(initial){
+          floatSaccadicAmplitude=0;
+          initialFixationPoint=parseInt(stimuliArray[i][numberFixationPointX]);
+        }
         if (parseInt(stimuliArray[i][numberFixationPointX]) < initialFixationPoint) {
           initialSaccadicAmplitude -= floatSaccadicAmplitude;
           initialSaccadicAmplitude=parseFloat(initialSaccadicAmplitude.toFixed(2))
@@ -129,7 +133,8 @@ $(document).ready(function(){
         arrayFixationPointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), initialFixationPoint, refValForPx]);
         arrayGazePointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), refValForPx]);
         arrayGazePointY.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), 540]);
-    	console.log(arrayForGraph);
+    	initial=false;
+
 	generateChartData(arrayForGraph);
 //create chart! 
 
