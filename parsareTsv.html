@@ -95,11 +95,50 @@
      
     console.log(stimuliArray);
       
-    var arrayForGraph = [];  
+  
+    for (var i= 0; i < stimuliArray[0].length; i++){
+      if (stimuliArray[0][i] === "MediaName"){
+        var numberMediaName = i;
+      }else if (stimuliArray[0][i] === "RecordingTimestamp"){
+        var numberRecordingTimestamp = i;
+      }else if (stimuliArray[0][i] === "FixationPointX (MCSpx)"){
+        var numberFixationPointX = i;  
+      }else if (stimuliArray[0][i] === "SaccadicAmplitude"){
+        var numberSaccadicAmplitude = i;
+      }else if (stimuliArray[0][i] === "ValidityLeft"){
+        var numberValidityLeft = i;
+      }else if (stimuliArray[0][i] === "ValidityRight"){
+        var numberValidityRight = i;
+      } 
+    } 
+    console.log(numberMediaName, numberRecordingTimestamp, numberFixationPointX, numberSaccadicAmplitude, numberValidityLeft, numberValidityRight);
+      
+    var arrayForGraph = [];
+    var initialMediaName = 0;
+    var initialFixationPoint = 0;
+    var initialSaccadicAmplitude = 0.0;
     for (var i=0; i < stimuliArray.length; i++){
-      if (stimuliArray[i][12] !== "" && stimuliArray[i][12] !== undefined && ((stimuliArray[i][81] == 0 && stimuliArray[i][82] == 0) || (stimuliArray[i][81] == 4 && stimuliArray[i][82] == 4))){
-        var numberFromString = parseFloat(stimuliArray[i][59].replace(",","."));
-        arrayForGraph.push([parseInt(stimuliArray[i][25]), numberFromString]);
+      if (stimuliArray[i][numberMediaName] !== "" && stimuliArray[i][numberMediaName] !== undefined && ((stimuliArray[i][numberValidityLeft] == 0 && stimuliArray[i][numberValidityRight] == 0) || (stimuliArray[i][numberValidityLeft] == 4 && stimuliArray[i][numberValidityRight] == 4))){
+        //Media Name Number
+        if (stimuliArray[i][numberMediaName] === "black.bmp") {
+          var numberFromMediaName = initialMediaName;
+        } else if (stimuliArray[i][numberMediaName] === "O.bmp") {
+          var numberFromMediaName = 0;
+        } else {
+          var numberFromMediaName = parseInt(stimuliArray[i][numberMediaName].replace(/[^0-9-]/g,""));
+          initialMediaName = numberFromMediaName;
+        }
+        //Saccadic Amplitude Number
+        var floatSaccadicAmplitude = parseFloat(stimuliArray[i][numberSaccadicAmplitude].replace(",","."));
+        if (parseInt(stimuliArray[i][numberFixationPointX]) < initialFixationPoint) {
+          initialSaccadicAmplitude -= floatSaccadicAmplitude;
+          initialFixationPoint = stimuliArray[i][numberFixationPointX];
+        } else if (parseInt(stimuliArray[i][numberFixationPointX]) > initialFixationPoint) {
+          initialSaccadicAmplitude += floatSaccadicAmplitude;
+          initialFixationPoint = stimuliArray[i][numberFixationPointX];
+        }
+        
+        arrayForGraph.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), numberFromMediaName, initialSaccadicAmplitude]);
       }      
     }
     console.log(arrayForGraph);
