@@ -134,15 +134,16 @@ $(document).ready(function(){
         arrayGazePointX.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), refValForPx]);
         arrayGazePointY.push([parseInt(stimuliArray[i][numberRecordingTimestamp]), parseInt(stimuliArray[i][numberGazePointX]), 540]);
     	initial=false;
-
+}}
 	generateChartData(arrayForGraph);
 //create chart! 
 
+
 	
-	
-    }
-    reader.readAsBinaryString(evt.target.files[0]);
+    
+    
   }
+		reader.readAsBinaryString(evt.target.files[0]);
   
     
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
