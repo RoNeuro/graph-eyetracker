@@ -71,6 +71,24 @@ $(document).ready(function () {
             var numberFromMediaName;
             var refValForPx = 0;
             var initial = true;
+            
+             //Patient data
+            var patientName = stimuliArray[1][4];
+            var patientSex = stimuliArray[1][5];
+            var dateOfRecord = stimuliArray[1][7];
+            var patientDataElement = document.getElementById('patient-data');
+            patientDataElement.innerHTML = "";
+            var patientNameElement = document.createElement('div');
+            var patientSexElement = document.createElement('div');
+            var dateOfRecordElement = document.createElement('div');
+            patientNameElement.innerHTML = "Patient Name: " + patientName;
+            patientSexElement.innerHTML = "Patient Sex: " + patientSex;
+            dateOfRecordElement.innerHTML = "Date of scan: " + dateOfRecord;
+
+            patientDataElement.appendChild(patientNameElement);
+            patientDataElement.appendChild(patientSexElement);
+            patientDataElement.appendChild(dateOfRecordElement);
+            
             for (var i = 0; i < stimuliArray.length; i++) {
 
                 if (stimuliArray[i][numberMediaName] !== "" && stimuliArray[i][numberMediaName] !== undefined && ((stimuliArray[i][numberValidityLeft] == 0 && stimuliArray[i][numberValidityRight] == 0) || (stimuliArray[i][numberValidityLeft] == 4 && stimuliArray[i][numberValidityRight] == 4))) {
