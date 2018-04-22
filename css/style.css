@@ -168,11 +168,9 @@ header {
     margin:5px 0;
 }
 header div {
-    background-color: aqua;
     width:100%;
     height:65px;
-    margin-left:300px;
-    background: linear-gradient(to right, white, transparent, mistyrose)
+    background: linear-gradient(to right, transparent 299px,white 300px, transparent, white)
 }
 footer {
     height:30px;

@@ -1,3 +1,10 @@
+var arrayForGraph = [];
+var arrayFixationPointX = [];
+var arrayGazePointX = [];
+var arrayGazePointY = [];
+var header={
+
+};
 $(document).ready(function () {
     var reader;
     function abortRead() {
@@ -41,6 +48,7 @@ $(document).ready(function () {
             console.log(stimuliArray);
 
             for (var i = 0; i < stimuliArray[0].length; i++) {
+                header[stimuliArray[0][i]]=i;
                 if (stimuliArray[0][i] === "MediaName") {
                     var numberMediaName = i;
                 } else if (stimuliArray[0][i] === "RecordingTimestamp") {
@@ -61,10 +69,7 @@ $(document).ready(function () {
             }
             console.log(numberMediaName, numberRecordingTimestamp, numberFixationPointX, numberSaccadicAmplitude, numberValidityLeft, numberValidityRight);
 
-            var arrayForGraph = [];
-            var arrayFixationPointX = [];
-            var arrayGazePointX = [];
-            var arrayGazePointY = [];
+
             var initialMediaName = 0;
             var initialFixationPoint = 0;
             var initialSaccadicAmplitude = 0.0;
@@ -73,22 +78,27 @@ $(document).ready(function () {
             var initial = true;
             
              //Patient data
-            var patientName = stimuliArray[1][4];
-            var patientSex = stimuliArray[1][5];
-            var dateOfRecord = stimuliArray[1][7];
-            var patientDataElement = document.getElementById('patient-data');
-            patientDataElement.innerHTML = "";
-            var patientNameElement = document.createElement('div');
-            var patientSexElement = document.createElement('div');
-            var dateOfRecordElement = document.createElement('div');
-            patientNameElement.innerHTML = "Patient Name: " + patientName;
-            patientSexElement.innerHTML = "Patient Sex: " + patientSex;
-            dateOfRecordElement.innerHTML = "Date of scan: " + dateOfRecord;
+            var patientName = stimuliArray[1][header["ParticipantName"]];
+            var patientSex = stimuliArray[1][header["[Gender]Value"]];
+            var dateOfRecord = stimuliArray[1][header["RecordingDate"]];
+            var scanType=stimuliArray[1][header["StudioTestName"]];
+            var numberOfRecords = stimuliArray[0].length*stimuliArray.length;
+            if (scanType === "horSacc") {
+                scanType = "Horizontal Saccade";
+            } else if (scanType === "antisaccades") {
+                scanType = "Anti Saccade";
+            } else if (scanType === "verSacc") {
+                scanType = "Vertical Saccade";
+            }
 
-            patientDataElement.appendChild(patientNameElement);
-            patientDataElement.appendChild(patientSexElement);
-            patientDataElement.appendChild(dateOfRecordElement);
-            
+            document.getElementById('patient-data').innerHTML = `
+            Patient Name: ${patientName}<br />
+            Patient Sex: ${patientSex}<br />
+            Date of scan: ${dateOfRecord}<br />
+            Scan Type: ${scanType}<br />
+            Number of Records: <b></b>${formatMillion(numberOfRecords)}</b>
+            `;
+
             for (var i = 0; i < stimuliArray.length; i++) {
 
                 if (stimuliArray[i][numberMediaName] !== "" && stimuliArray[i][numberMediaName] !== undefined && ((stimuliArray[i][numberValidityLeft] == 0 && stimuliArray[i][numberValidityRight] == 0) || (stimuliArray[i][numberValidityLeft] == 4 && stimuliArray[i][numberValidityRight] == 4))) {
@@ -108,7 +118,9 @@ $(document).ready(function () {
                     var floatSaccadicAmplitude = parseFloat(stimuliArray[i][numberSaccadicAmplitude].replace(",", "."));
                     if (initial) {
                         floatSaccadicAmplitude = 0;
-                        initialFixationPoint = parseInt(stimuliArray[i][numberFixationPointX]);
+                        if(stimuliArray[i][numberFixationPointX]!==""){
+                            initialFixationPoint = parseInt(stimuliArray[i][numberFixationPointX]);
+                        }
                     }
                     if (parseInt(stimuliArray[i][numberFixationPointX]) < initialFixationPoint) {
                         initialSaccadicAmplitude -= floatSaccadicAmplitude;
@@ -127,17 +139,34 @@ $(document).ready(function () {
                     initial = false;
                 }
             }
-            generateChartData(arrayForGraph);
-            generateFixedChartData(arrayFixationPointX);
-            generateGazePointX(arrayGazePointX);
-            generateGazePointY(arrayGazePointY);
+
         };
         reader.readAsBinaryString(evt.target.files[0]);
     }
     document.getElementById('files').addEventListener('change', handleFileSelect, false);
 });
+function showChart(){
 
-
+    generateChartData(arrayForGraph);
+    generateFixedChartData(arrayFixationPointX);
+    generateGazePointX(arrayGazePointX);
+    generateGazePointY(arrayGazePointY);
+}
+function formatMillion(val) {
+    if (val === "" || val === undefined || val === null || val === 0) {
+        return "";
+    }
+    if (Math.abs(val) < 1000) {
+        return (val).toFixed(0) + ""
+    }
+    if (Math.abs(val) < 1000000) {
+        return (val / 1000.0).toFixed(0) + "K"
+    }
+    if (Math.abs(val) < 1000000000) {
+        return (val / 1000000.0).toFixed(2) + "M"
+    }
+    return (val / 1000000000.0).toFixed(2) + "B"
+}
 
 
 
