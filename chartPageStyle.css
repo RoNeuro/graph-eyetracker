@@ -5,9 +5,29 @@ html {
   'background: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);
 }
 
+
+body{
+  font:600 16px/18px 'Open Sans',sans-serif;
+}
+
 #doctor-name {
   text-align: right;
   padding-right: 2%;
+}
+
+#patient-data{
+  font: 400;
+}
+
+.generateButton{
+  background: orange;
+  width: 200px;
+  border-radius: 25px;
+  height: 30;
+  position: relative;
+  margin-left: 550px;
+  margin-top: -50px;
+  font-size: 20;
 }
 
 nav {
