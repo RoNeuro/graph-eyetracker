@@ -89,15 +89,18 @@ $(document).ready(function () {
                 scanType = "Anti Saccade";
             } else if (scanType === "verSacc") {
                 scanType = "Vertical Saccade";
+            }else{
+                scanType = "Horizontal Saccade";
             }
 
             document.getElementById('patient-data').innerHTML = `
             Patient Name: ${patientName}<br />
-            Patient Sex: ${patientSex}<br />
+            Patient Sex: ${patientSex|| ""}<br />
             Date of scan: ${dateOfRecord}<br />
             Scan Type: ${scanType}<br />
             Number of Records: <b></b>${formatMillion(numberOfRecords)}</b>
             `;
+            document.querySelector("#generateContainer").style.display="block";
 
             for (var i = 0; i < stimuliArray.length; i++) {
 
