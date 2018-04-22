@@ -110,7 +110,7 @@ function generateFixedChartData(data) {
     var chart = AmCharts.makeChart("fixPoint", {
         "type": "serial",
         "theme": "light",
-        "mouseWheelZoomEnabled": true,
+        "mouseWheelZoomEnabled": false,
         "legend": {
             "useGraphSettings": true,
             "position": "right",
@@ -197,7 +197,7 @@ function generateGazePointX(data) {
     var chart = AmCharts.makeChart("gazePointx", {
         "type": "serial",
         "theme": "light",
-        "mouseWheelZoomEnabled": true,
+        "mouseWheelZoomEnabled": false,
         "legend": {
             "useGraphSettings": true,
             "position": "right",
@@ -281,7 +281,7 @@ function generateGazePointY(data) {
     var chart = AmCharts.makeChart("gazePointy", {
         "type": "serial",
         "theme": "light",
-        "mouseWheelZoomEnabled": true,
+        "mouseWheelZoomEnabled": false,
         "legend": {
             "useGraphSettings": true,
             "position": "right",
