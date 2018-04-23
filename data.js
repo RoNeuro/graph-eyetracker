@@ -5,7 +5,6 @@ var arrayGazePointY = [];
 var header={
 
 };
-$(document).ready(function () {
     var reader;
     function abortRead() {
         reader.abort();
@@ -146,8 +145,7 @@ $(document).ready(function () {
         };
         reader.readAsBinaryString(evt.target.files[0]);
     }
-    document.getElementById('files').addEventListener('change', handleFileSelect, false);
-});
+
 function showChart(){
 
     generateChartData(arrayForGraph);
@@ -170,7 +168,9 @@ function formatMillion(val) {
     }
     return (val / 1000000000.0).toFixed(2) + "B"
 }
-
+function onload(){
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+}
 
 
 

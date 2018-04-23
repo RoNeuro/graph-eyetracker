@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
     <link rel="stylesheet" href="chartPageStyle.css">
@@ -10,9 +12,10 @@
             font-size: 22px;
         }
     </style>
+
 </head>
 
-<body style="padding-bottom:100px;">
+<body style="padding-bottom:100px;" onload="onload()">
 
 
 <div id="mare">
@@ -39,29 +42,24 @@
             <div id="importInfo"></div>
             <button class= "generateButton" onclick="showChart();">Generate Chart</button>
         </div>
-        <div id="gazePointx" style="max-height: 500px;"></div>
-        <div id="fixPoint" style="max-height: 500px;"></div>
-        <div id="sacade" style="max-height: 500px;"></div>
-        <div id="gazePointy" style="max-height: 500px;"></div>
+        <div id="gazePointx" style="height: 500px;"></div>
+        <div id="fixPoint" style="height: 500px;"></div>
+        <div id="sacade" style="height: 500px;"></div>
+        <div id="gazePointy" style="height: 500px;"></div>
 
     </div>
 </div>
 <footer style="position: fixed;bottom: 0;">
     <br/>Copyright &copy 2018
 </footer>
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all"/>
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="js/amcharts/amcharts.js"></script>
+<script type="text/javascript" src="js/amcharts/plugins/export/export.min.js"></script>
+<script type="text/javascript" src="js/amcharts/serial.js"></script>
+<script type="text/javascript" src="js/amcharts/themes_light.js"></script>
 <script type="text/javascript" src="data.js"></script>
 <script type="text/javascript" src="chart.js"></script>
-
+<link rel="stylesheet" href="js/amcharts/plugins/export/export.css" type="text/css" media="all"/>
 </body>
 
 </html>
