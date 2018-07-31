@@ -179,11 +179,21 @@ header div {
     float:left;
     display:inline-block;
 }
+header div {
+    background-color: aqua;
+    width:100%;
+    height:65px;
+    background: linear-gradient(to right, white, transparent, mistyrose);
+    position: absolute;
+    float:left;
+    display:inline-block;
+}
 footer {
     height:30px;
     background-color: rgba(255, 165, 0, 80%);
     margin:30px 0;
     padding:5px 10px;
+    padding:5px;
     color:darkslategray;
     font-size:14px;
 }
