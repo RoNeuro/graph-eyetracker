@@ -2,6 +2,7 @@ var arrayForGraph = [];
 var arrayFixationPointX = [];
 var arrayGazePointX = [];
 var arrayGazePointY = [];
+
 var header={
 
 };
@@ -26,6 +27,11 @@ var header={
     }
 
     function handleFileSelect(evt) {
+        console.log("in handlefileselect.")
+         arrayForGraph = [];
+         arrayFixationPointX = [];
+         arrayGazePointX = [];
+         arrayGazePointY = [];
 
         reader = new FileReader();
         reader.onerror = errorHandler;
@@ -44,7 +50,7 @@ var header={
                 '-10': 550,
                 '0': 960
             };
-            console.log(stimuliArray);
+            console.log("stimuliArray : ", stimuliArray);
 
             for (var i = 0; i < stimuliArray[0].length; i++) {
                 header[stimuliArray[0][i]]=i;
@@ -152,6 +158,7 @@ function showChart(){
     generateFixedChartData(arrayFixationPointX);
     generateGazePointX(arrayGazePointX);
     generateGazePointY(arrayGazePointY);
+
 }
 function formatMillion(val) {
     if (val === "" || val === undefined || val === null || val === 0) {
@@ -171,7 +178,3 @@ function formatMillion(val) {
 function onload(){
     document.getElementById('files').addEventListener('change', handleFileSelect, false);
 }
-
-
-
-
