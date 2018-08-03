@@ -152,13 +152,28 @@ var header={
         reader.readAsBinaryString(evt.target.files[0]);
     }
 
-function showChart(){
+function loadGif(){
+    console.log("load gif function")
+    document.getElementById("loadingImage").removeAttribute("hidden");
+    setTimeout(showChart, 10);
+}
 
+function hideGif(){
+    document.getElementById("loadingImage").setAttribute("hidden", "");
+}
+function showChart(){ 
     generateChartData(arrayForGraph);
     generateFixedChartData(arrayFixationPointX);
     generateGazePointX(arrayGazePointX);
     generateGazePointY(arrayGazePointY);
+    hideGif();
+}
+function clearDivs(){
+    while (graphContainer.hasChildNodes()) {   
+        graphContainer.removeChild(graphContainer.firstChild);
+    }
 
+    graphContainer.innerHTML = '<div id="gazePointx" class="chartContainer"></div> <div id="fixPoint" class="chartContainer"></div> <div id="sacade" class="chartContainer"></div>  <div id="gazePointy" class="chartContainer"></div>';
 }
 function formatMillion(val) {
     if (val === "" || val === undefined || val === null || val === 0) {

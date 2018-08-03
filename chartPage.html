@@ -32,7 +32,7 @@
         <br/>
         <div class="buttons_bar">
             <button class="button1" onclick="window.location.reload();">Home</button>
-            <label for="files" class="button2">Import</label>
+            <label for="files" class="button2" onclick="clearDivs()">Import</label>
             <button class="button3">Istoric</button>
 
         </div>
@@ -40,12 +40,18 @@
         <div id="patient-data"></div>
         <div id="generateContainer" style="display:none;">
             <div id="importInfo"></div>
-            <button class= "generateButton" onclick="showChart();">Generate Chart</button>
+            <button class= "generateButton" onclick="loadGif();">Generate Chart</button>
         </div>
-        <div id="gazePointx" style="height: 500px;"></div>
-        <div id="fixPoint" style="height: 500px;"></div>
-        <div id="sacade" style="height: 500px;"></div>
-        <div id="gazePointy" style="height: 500px;"></div>
+
+        <div id="loadingImage" hidden><span>Charts are loading!</span>
+            <div class="lds-css ng-scope">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div> 
+                </div>
+            </div>
+        </div>
+
+        <div id="graphContainer"></div>
 
     </div>
 </div>
