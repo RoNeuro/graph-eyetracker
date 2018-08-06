@@ -31,11 +31,13 @@ function errorHandler(evt) {
 
 function handleFileSelect(evt) {
     console.log("in handlefileselect.")
+    clearDivs()
     arrayForGraph = [];
     arrayFixationPointX = [];
     arrayGazePointX = [];
     arrayGazePointY = [];
     scanTypeFromFile = "";
+
 
     reader = new FileReader();
     reader.onerror = errorHandler;
