@@ -19,7 +19,7 @@ var fieldPatientName = "ParticipantName",
 
     fileStimulusCenter = 'O.bmp',
     fileStimulusBlack = 'black.bmp',
-    fileStimulusError=15,
+    fileStimulusError=45,
     // fileStimulusX10DegreesRight = 'O(+10).bmp',
     // fileStimulusX18DegreesRight = 'O(+18).bmp',
     // fileStimulusX10DegreesLeft = 'O(-10).bmp',

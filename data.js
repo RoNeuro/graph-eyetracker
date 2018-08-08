@@ -97,17 +97,18 @@ function handleFileSelect(evt) {
                     refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
                     if(savedPx!==refValForPx){
                         if(mode===""){
-                            var gazeX = arrayFixationPointX[arrayFixationPointX.length-2][2];
-                            console.log(time,mode,savedPx,gazeX);
-                            if(savedPx>gazeX+fileStimulusError ||
-                                savedPx<gazeX-fileStimulusError){
-
-                                errorVal=refValForPx;
-                            }
                             mode="sacade";
                         }else{
-                            errorVal=null;
                             mode="";
+                        }
+                        errorVal=null;
+                        var gazeX = arrayFixationPointX[arrayFixationPointX.length-2][2];
+                        console.log(time,mode,savedPx,gazeX,savedPx>gazeX+fileStimulusError ||
+                            savedPx<gazeX-fileStimulusError);
+                        if(savedPx>gazeX+fileStimulusError ||
+                            savedPx<gazeX-fileStimulusError){
+
+                            errorVal=1900/*refValForPx*/;
                         }
                     }
                     savedPx = refValForPx;
