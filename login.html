@@ -2,19 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Day 001 Login Form</title>
-        <link rel="stylesheet" href="css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
         <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
     </head>
-    <header>
-        <a href="https://www.roneuro.ro/">
-            <img src="Logo.jpg">
-            <div></div>
-        </a>
-        
-    </header>
     <body>
+        <header>
+            <a href="https://www.roneuro.ro/">
+                <img src="/logo_background_img/logo.jpg">
+                <div></div>
+            </a>
+        </header>
         <div id="bigWrap">
             <div class="login-wrap">
                 <div class="login-html">
@@ -35,7 +34,7 @@
                                 <label for="check"><span class="icon"></span> Keep me Signed in</label>
                             </div>
                             <div class="group">
-                                <input type="submit" class="button" value="Sign In">
+                                <a href="chartPage.html"><input type="submit" class="button" value="Sign In"></a>
                             </div>
                             <div class="hr"></div>
                             <div class="foot-lnk">
@@ -72,12 +71,15 @@
                     </div>
                 </div>
             </div>
-      </div>
-        <script src="script.js"></script>
+        </div>
+        <footer>
+            <a target="_blank" href="https://www.roneuro.ro/termeni-si-conditii-de-utilizare-ok">Termeni si conditii de utilizare</a>
+            <span>
+                <a href="https://www.roneuro.ro/">&copy; RoNeuro&nbsp;</a>
+                <span id="year"></span>
+            </span>
+        </footer>
+        <script src="login.js"></script>
     </body>
-    <footer>
-        <a target="_blank" href="https://www.roneuro.ro/termeni-si-conditii-de-utilizare-ok">Termeni si conditii de utilizare</a>
-        <span><a href="https://www.roneuro.ro/">&copy; RoNeuro&nbsp;</a> <span id="year"></span></span>
-    </footer>
 </html>
 

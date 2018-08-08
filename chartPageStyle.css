@@ -8,6 +8,7 @@ html {
 
 body{
   font:600 16px/18px 'Open Sans',sans-serif;
+    background-color:rgba(49, 175, 195, 0.5);
 }
 
 #doctor-name {
@@ -17,19 +18,31 @@ body{
 
 #patient-data{
   font: 400;
+    margin: 10px;
 }
 
 .generateButton{
   background: orange;
-  width: 200px;
-  border-radius: 25px;
-  height: 30;
-  position: relative;
-  margin-left: 550px;
-  margin-top: -50px;
-  font-size: 20;
+  font-size: 20px;
+    display:flex;
+    justify-content: center;
+    margin:10px auto;
+    border:none;
+    width: 300px;
+    height: 50px;
+	padding:15px 20px;
+	border-radius:25px;
+	background-color:orange;
+    color:rgba(40,57,101,.9);
+    font-variant-caps: all-petite-caps;
 }
-
+.generateButton:hover {
+    color: rgba(40,57,101,.9);
+    box-shadow: 0 0 10px rgba(40,57,101,.9);
+}
+.generateButton:active {
+    background-color: orangered;
+}
 nav {
   max-width: 960px;
   mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
@@ -66,66 +79,101 @@ nav ul li a:hover {
 
 .button_logout {
   float: right; 
-  margin-right: 30px;
   padding: 5px;
   border: none;
-  font-size: 15px;
-  font-weight: bold;
-  background: white;
-  
+  font-size: 18px;
+    font-variant-caps: all-small-caps;
+    background-color: rgba(40,57,101,.9);
+    color:orange;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    padding: 9px 0px 9px 10px;
+    width: 135px;
 }
 
 .button_logout:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    color:orangered;
+    box-shadow: 0 0 15px orangered;
 }
 
 .button1 {
-  padding: 20px;
-  margin-left: 270px;
-  margin-right: 10px;
   border: none;
   background: none;
   font-size: 20px;
-  font-weight: bold;
+    color:orange;
+    font-variant-caps:all-petite-caps;
+    height:80%;
+    padding: 0 15px;
+    letter-spacing: 1px;
 }
 .button1:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    color: navajowhite;
+    box-shadow: 0px 0 18px orange;
+    border-radius: 100px;
+    background-color: light;
 }
-
+.button1:active {
+    color:orangered;
+}
 .button2 {
-  padding: 20px;
-  margin-left: 200px;
-  margin-right: 200px;
   border: none;
-  background: none;
   font-size: 20px;
-  font-weight: bold;
+    color:orange;
+    font-weight: 900;
+    font-variant-caps:all-petite-caps;
+    font-size: 21px;
+    height:80%;
+    display:flex;
+    align-items: center;
+    padding: 0 15px;
+    letter-spacing: 1px;
+        
 }
-
 .button2:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    color:navajowhite;
+    box-shadow: 0px 0 18px orange;
+    border-radius: 100px;
+    background-color: light;
 }
-
+.button2:active {
+    color:orangered;
+}
 .button3{
-  padding: 20px;
-  margin-left: 50px;
-  margin-right: 250px;
   border: none;
   background: none;
   font-size: 20px;
-  font-weight: bold;
+    color:orange;
+    font-variant-caps:all-petite-caps;
+    height:80%;
+    padding: 0 15px;
+    letter-spacing: 1px;
 }
 .button3:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    color:navajowhite;
+    box-shadow: 0px 0 18px orange;
+    border-radius: 100px;
+    background-color: light;
 }
-
+.button3:active {
+    color:orangered;
+}
 .buttons_bar{
-  
-  background: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);
+    background-color:rgba(40,57,101,.9);
+    color:orange;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height:50px;
+    margin: 10px 0;
 }
 
 footer{
   width: 100%;
-  height: 50px;
+  height: 30px;
   text-align: center;
-  background: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);
+  background-color:orange;
+    color:darkslategray;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
