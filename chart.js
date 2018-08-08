@@ -1,6 +1,6 @@
 var charts=[];
 
-function generateChartData(data) {
+function generateChartAmplitudeX(data) {
     var chartData = [];
     var benchAmptitude = 0;
     var amptitude = 0;
@@ -85,12 +85,11 @@ function generateChartData(data) {
         },
     });
 
-
     charts.push(chart);
 }
 
 
-function generateFixedChartData(data) {
+function generateChartFixedPointX(data) {
     var chartData = [];
     var benchAmptitude = 0;
     var amptitude = 0;
@@ -177,7 +176,7 @@ function generateFixedChartData(data) {
     charts.push(chart);
 }
 
-function generateGazePointX(data) {
+function generateChartGazePointX(data) {
     var chartData = [];
     var benchAmptitude = 0;
     var amptitude = 0;
@@ -261,7 +260,7 @@ function generateGazePointX(data) {
     });
     charts.push(chart);
 }
-function generateGazePointY(data) {
+function generateChartGazePointY(data) {
     var chartData = [];
     var benchAmptitude = 0;
     var amptitude = 0;
@@ -356,6 +355,7 @@ function generateGazePointY(data) {
         }],
     });
     charts.push(chart);
+    
     for (var x in charts) {
         charts[x].addListener("zoomed", syncZoom);
         charts[x].addListener("init", addCursorListeners);
