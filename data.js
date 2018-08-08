@@ -31,11 +31,13 @@ function errorHandler(evt) {
 
 function handleFileSelect(evt) {
     console.log("in handlefileselect.")
+    clearDivs()
     arrayForGraph = [];
     arrayFixationPointX = [];
     arrayGazePointX = [];
     arrayGazePointY = [];
     scanTypeFromFile = "";
+
 
     reader = new FileReader();
     reader.onerror = errorHandler;
@@ -89,11 +91,11 @@ function handleFileSelect(evt) {
                 } else if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusBlack) {
                     numberFromMediaName = 0;
                     initialMediaName = numberFromMediaName;
-                    refValForPx = ref['0'];
+                    refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
                 } else {
-                    numberFromMediaName = getNumberFromMediaName(stimuliArray[i][tableHeader.numberMediaName]);
+                    numberFromMediaName = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].value;
                     initialMediaName = numberFromMediaName;
-                    refValForPx = ref[numberFromMediaName + ""];
+                    refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
                 }
                 //Saccadic Amplitude Number
                 var floatSaccadicAmplitude = parseFloat(stimuliArray[i][tableHeader.numberSaccadicAmplitude].replace(",", "."));
@@ -112,8 +114,7 @@ function handleFileSelect(evt) {
                     initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
                     initialFixationPoint = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                 }
-
-                arrayForGraph.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), tableHeader.numberFromMediaName, initialSaccadicAmplitude]);
+                arrayForGraph.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), numberFromMediaName, initialSaccadicAmplitude]);
                 arrayFixationPointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, initialFixationPoint]);
                 arrayGazePointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, parseInt(stimuliArray[i][tableHeader.numberGazePointX])]);
                 arrayGazePointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), 540, parseInt(stimuliArray[i][tableHeader.numberGazePointY])]);
@@ -156,15 +157,15 @@ function formatMillion(val) {
         return "";
     }
     if (Math.abs(val) < 1000) {
-        return (val).toFixed(0) + ""
+        return (val).toFixed(0) + "";
     }
     if (Math.abs(val) < 1000000) {
-        return (val / 1000.0).toFixed(0) + "K"
+        return (val / 1000.0).toFixed(0) + "K";
     }
     if (Math.abs(val) < 1000000000) {
-        return (val / 1000000.0).toFixed(2) + "M"
+        return (val / 1000000.0).toFixed(2) + "M";
     }
-    return (val / 1000000000.0).toFixed(2) + "B"
+    return (val / 1000000000.0).toFixed(2) + "B";
 }
 
 function onload() {

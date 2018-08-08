@@ -19,37 +19,52 @@ var fieldPatientName = "ParticipantName",
 
     fileStimulusCenter = '0.bmp',
     fileStimulusBlack = 'black.bmp',
-    fileStimulusX10DegreesRight = 'O(+10).bmp',
-    fileStimulusX18DegreesRight = 'O(+18).bmp',
-    fileStimulusX10DegreesLeft = 'O(-10).bmp',
-    fileStimulusX18DegreesLeft = 'O(-18).bmp',
-    fileStimulusY8DegreesUp = 'O-(+8).bmp',
-    fileStimulusY8DegreesDown = 'O-(-8).bmp',
+    // fileStimulusX10DegreesRight = 'O(+10).bmp',
+    // fileStimulusX18DegreesRight = 'O(+18).bmp',
+    // fileStimulusX10DegreesLeft = 'O(-10).bmp',
+    // fileStimulusX18DegreesLeft = 'O(-18).bmp',
+    // fileStimulusY8DegreesUp = 'O-(+8).bmp',
+    // fileStimulusY8DegreesDown = 'O-(-8).bmp',
 
-    position_CenterX = 960,
-    position_CenterY = 540,
-
-    position_X10DegreesRight = 1384,
-    position_Y10DegreesRight = 540,
-    position_X18DegreesRight = 1771,
-    position_Y18DegreesRight = 540,
-    position_X10DegreesLeft = 534,
-    position_Y10DegreesLeft = 540,
-    position_X18DegreesLeft = 148,
-    position_Y18DegreesLeft = 540,
-
-    position_X8DegreesUp = 960,
-    position_Y8DegreesUp = 188,
-    position_X8DegreesDown = 960,
-    position_Y8DegreesDown = 891,
-
-    ref = {
-        // TODO: Replace this with variables
-        '18': 1780,
-        '-18': 150,
-        '10': 1360,
-        '-10': 550,
-        '0': 960
+    fileStimuli = {
+        'O.bmp': {
+            value: 0,
+            positionDegreeX: 960,
+            positionDegreeY: 540,
+        },
+        'black.bmp': {
+            value: 0,
+        },
+        'O(+10).bmp': {
+            value: 10,
+            positionDegreeX: 1384,
+            positionDegreeY: 540,
+        },
+        'O(+18).bmp': {
+            value: 18,
+            positionDegreeX: 1771,
+            positionDegreeY: 540,
+        },
+        'O(-10).bmp': {
+            value: -10,
+            positionDegreeX: 534,
+            positionDegreeY: 540,
+        },
+        'O(-18).bmp': {
+            value: -18,
+            positionDegreeX: 148,
+            positionDegreeY: 540,
+        },
+        'O-(+8).bmp': {
+            value: 8,
+            positionDegreeX: 960,
+            positionDegreeY: 188,
+        },
+        'O-(-8).bmp': {
+            value: -8,
+            positionDegreeX: 960,
+            positionDegreeY: 891,
+        }
     };
 
 function scanTypeString(type) {
@@ -87,9 +102,4 @@ function makeNumberFromColumnName(headerArray) {
         }
     }
     return (returnArray);
-}
-
-function getNumberFromMediaName(name) {
-    // TODO: replace this with variables
-    return parseInt(name.replace(/[^0-9+-]/g, ""))
 }
