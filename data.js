@@ -87,9 +87,9 @@ function handleFileSelect(evt) {
         for (var i = 0; i < stimuliArray.length; i++) {
             if (stimuliArray[i][tableHeader.numberMediaName] !== "" && stimuliArray[i][tableHeader.numberMediaName] !== undefined && ((stimuliArray[i][tableHeader.numberValidityLeft] == 0 && stimuliArray[i][tableHeader.numberValidityRight] == 0) || (stimuliArray[i][tableHeader.numberValidityLeft] == 4 && stimuliArray[i][tableHeader.numberValidityRight] == 4))) {
                 //Media Name Number
-                if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusCenter) {
+                if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusBlack) {
                     numberFromMediaName = initialMediaName;
-                } else if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusBlack) {
+                } else if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusCenter) {
                     numberFromMediaName = 0;
                     initialMediaName = numberFromMediaName;
                     refValForPx = fileStimuli[fileStimulusCenter].positionDegreeX;
