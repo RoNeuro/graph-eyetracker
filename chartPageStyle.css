@@ -8,7 +8,7 @@ html {
 
 body{
   font:600 16px/18px 'Open Sans',sans-serif;
-    background-color:rgba(49, 175, 195, 0.5);
+    background-color:rgba(49, 175, 195, 0.1);
 }
 
 #doctor-name {
@@ -94,7 +94,7 @@ nav ul li a:hover {
   font-size: 18px;
     font-variant-caps: all-small-caps;
     background-color: rgba(40,57,101,.9);
-    color:orange;
+    color:white;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     padding: 9px 0px 9px 10px;
@@ -110,7 +110,7 @@ nav ul li a:hover {
   border: none;
   background: none;
   font-size: 20px;
-    color:orange;
+    color:white;
     font-variant-caps:all-petite-caps;
     height:80%;
     padding: 0 15px;
@@ -128,7 +128,7 @@ nav ul li a:hover {
 .button2 {
   border: none;
   font-size: 20px;
-    color:orange;
+    color:white;
     font-weight: 900;
     font-variant-caps:all-petite-caps;
     font-size: 21px;
@@ -152,7 +152,7 @@ nav ul li a:hover {
   border: none;
   background: none;
   font-size: 20px;
-    color:orange;
+    color:white;
     font-variant-caps:all-petite-caps;
     height:80%;
     padding: 0 15px;
