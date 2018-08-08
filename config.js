@@ -17,7 +17,7 @@ var fieldPatientName = "ParticipantName",
     filedAntiSaccade = "antisaccades",
     scanTypeFromFile = "",
 
-    fileStimulusCenter = '0.bmp',
+    fileStimulusCenter = 'O.bmp',
     fileStimulusBlack = 'black.bmp',
     // fileStimulusX10DegreesRight = 'O(+10).bmp',
     // fileStimulusX18DegreesRight = 'O(+18).bmp',
