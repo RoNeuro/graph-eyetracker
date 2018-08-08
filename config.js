@@ -89,6 +89,8 @@ function makeNumberFromColumnName(headerArray) {
             returnArray.numberRecordingTimestamp = i;
         } else if (headerArray[i] === fieldFixationPointX) {
             returnArray.numberFixationPointX = i;
+        } else if (headerArray[i] === fieldFixationPointY) {
+            returnArray.numberFixationPointY = i;
         } else if (headerArray[i] === fieldSaccadicAmplitude) {
             returnArray.numberSaccadicAmplitude = i;
         } else if (headerArray[i] === fieldValidityLeft) {

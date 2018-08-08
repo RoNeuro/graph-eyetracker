@@ -27,6 +27,7 @@ function handleFileSelect(evt) {
     clearDivs()
     arrayAmplitudeX = [];
     arrayFixationPointX = [];
+    arrayFixationPointY = [];
     arrayGazePointX = [];
     arrayGazePointY = [];
     scanTypeFromFile = "";
@@ -48,12 +49,13 @@ function handleFileSelect(evt) {
         var tableHeader = makeNumberFromColumnName(stimuliArray[0]);
 
         var initialFixationPointX = fileStimuli[fileStimulusCenter].positionDegreeX;
+        var initialFixationPointY = fileStimuli[fileStimulusCenter].positionDegreeY;
         var initialSaccadicAmplitude = fileStimuli[fileStimulusCenter].amplitude;
         var refValForAmplitudeX = fileStimuli[fileStimulusCenter].amplitude;
         var refValForPx = initialFixationPointX;
-        var refValForPy = fileStimuli[fileStimulusCenter].positionDegreeY;
+        var refValForPy = initialFixationPointY;
         var savedPx = initialFixationPointX;
-        var savedPy = refValForPy;
+        var savedPy = initialFixationPointY;
         var savedAmplitudeX = refValForAmplitudeX;
         var initial = true;
         scanTypeFromFile = stimuliArray[1][header[fieldStudioTestName]];
@@ -98,6 +100,9 @@ function handleFileSelect(evt) {
                     if (stimuliArray[i][tableHeader.numberFixationPointX] !== "") {
                         initialFixationPointX = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                     }
+                    if (stimuliArray[i][tableHeader.numberFixationPointY] !== "") {
+                        initialFixationPointY = parseInt(stimuliArray[i][tableHeader.numberFixationPointY]);
+                    }
                 }
                 if (parseInt(stimuliArray[i][tableHeader.numberFixationPointX]) < initialFixationPointX) {
                     initialSaccadicAmplitude -= floatSaccadicAmplitude;
@@ -108,10 +113,23 @@ function handleFileSelect(evt) {
                     initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
                     initialFixationPointX = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                 }
+
+                if (parseInt(stimuliArray[i][tableHeader.numberFixationPointY]) < initialFixationPointY) {
+                    // initialSaccadicAmplitude -= floatSaccadicAmplitude;
+                    // initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
+                    initialFixationPointY = parseInt(stimuliArray[i][tableHeader.numberFixationPointY]);
+                } else if (parseInt(stimuliArray[i][tableHeader.numberFixationPointY]) > initialFixationPointY) {
+                    // initialSaccadicAmplitude += floatSaccadicAmplitude;
+                    // initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
+                    initialFixationPointY = parseInt(stimuliArray[i][tableHeader.numberFixationPointY]);
+                }
                 var valSaccadeAmplitudeX = initialSaccadicAmplitude;
                 var valFixationPointX = initialFixationPointX;
+                var valFixationPointY = initialFixationPointY;
+
                 arrayAmplitudeX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForAmplitudeX, valSaccadeAmplitudeX]);
                 arrayFixationPointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, valFixationPointX]);
+                arrayFixationPointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPy, valFixationPointY]);
                 arrayGazePointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, parseInt(stimuliArray[i][tableHeader.numberGazePointX])]);
                 arrayGazePointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPy, parseInt(stimuliArray[i][tableHeader.numberGazePointY])]);
                 initial = false;
@@ -142,17 +160,20 @@ function removeGif() {
 
 function showChart() {
     if (scanTypeFromFile == fieldHorizontalSaccade){
-        graphContainer.innerHTML = '<div id="gazePointx" class="chartContainer"></div> <div id="fixPoint" class="chartContainer"></div> <div id="sacade" class="chartContainer"></div>';
+        graphContainer.innerHTML = '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
         generateChartAmplitudeX(arrayAmplitudeX);
         generateChartFixedPointX(arrayFixationPointX);
         generateChartGazePointX(arrayGazePointX);
     }
     else if (scanTypeFromFile == fieldVerticalSaccade){
-        graphContainer.innerHTML = '<div id="gazePointy" class="chartContainer"></div>';
+        graphContainer.innerHTML = '<div id="gazePointY" class="chartContainer"></div> <div id="fixationPointY" class="chartContainer"></div>';
         generateChartGazePointY(arrayGazePointY);
+        generateChartFixedPointY(arrayFixationPointY);
     } else if (scanTypeFromFile == filedAntiSaccade){
-        graphContainer.innerHTML =  '<div id="sacade" class="chartContainer"></div>';
+        graphContainer.innerHTML =  '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
         generateChartAmplitudeX(arrayAmplitudeX);
+        generateChartFixedPointX(arrayFixationPointX);
+        generateChartGazePointX(arrayGazePointX);
     } else {
         graphContainer.innerHTML = '<h3>Momentan pentru acest tip de scanare nu exista grafice</h3>';
     }
