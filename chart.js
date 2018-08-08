@@ -10,11 +10,12 @@ function generateChart(data,name,title) {
         benchAmptitude = data[i][1];
         amptitude = data[i][2];
         time = data[i][0];
-
+        error = data[i][3];
         chartData.push({
             time: time,
             benchAmptitude: benchAmptitude,
-            amptitude: amptitude
+            amptitude: amptitude,
+            error:error
         });
     }
     var chart = AmCharts.makeChart(name, {
@@ -54,6 +55,17 @@ function generateChart(data,name,title) {
                 "title": "patient",
                 "valueField": "amptitude",
                 "fillAlphas": 0
+            },
+            {
+                "valueAxis": "v1",
+                "lineColor": "#FF0000",
+                "bullet": "square",
+                "bulletBorderThickness": 2,
+                "hideBulletsCount": 30,
+                "title": "patient",
+                "valueField": "error",
+                "fillAlphas": 0.3,
+                "connect": false,
             }],
         "chartScrollbar": {},
         "chartCursor": {

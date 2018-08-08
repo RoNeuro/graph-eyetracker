@@ -80,18 +80,36 @@ function handleFileSelect(evt) {
             `;
         document.querySelector("#generateContainer").style.display = "block";
         generateButton();
-
+        var mode="";
+        var errorVal = null;
         for (var i = 0; i < stimuliArray.length; i++) {
             if (stimuliArray[i][tableHeader.numberMediaName] !== "" && stimuliArray[i][tableHeader.numberMediaName] !== undefined && ((stimuliArray[i][tableHeader.numberValidityLeft] == 0 && stimuliArray[i][tableHeader.numberValidityRight] == 0) || (stimuliArray[i][tableHeader.numberValidityLeft] == 4 && stimuliArray[i][tableHeader.numberValidityRight] == 4))) {
                 //Media Name Number
+                var time=parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]);
                 if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusBlack) {
                     refValForAmplitudeX = savedAmplitudeX;
                     refValForPx = savedPx;
                     refValForPy = savedPy;
-                 } else {
+                } else {
+
                     refValForAmplitudeX = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].amplitude;
                     savedAmplitudeX = refValForAmplitudeX;
                     refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
+                    if(savedPx!==refValForPx){
+                        if(mode===""){
+                            var gazeX = arrayFixationPointX[arrayFixationPointX.length-2][2];
+                            console.log(time,mode,savedPx,gazeX);
+                            if(savedPx>gazeX+fileStimulusError ||
+                                savedPx<gazeX-fileStimulusError){
+
+                                errorVal=refValForPx;
+                            }
+                            mode="sacade";
+                        }else{
+                            errorVal=null;
+                            mode="";
+                        }
+                    }
                     savedPx = refValForPx;
                     refValForPy = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeY;
                     savedPy = refValForPy;
@@ -126,15 +144,18 @@ function handleFileSelect(evt) {
                     // initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
                     initialFixationPointY = parseInt(stimuliArray[i][tableHeader.numberFixationPointY]);
                 }
+
+
                 var valSaccadeAmplitudeX = initialSaccadicAmplitude;
                 var valFixationPointX = initialFixationPointX;
                 var valFixationPointY = initialFixationPointY;
 
-                arrayAmplitudeX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForAmplitudeX, valSaccadeAmplitudeX]);
-                arrayFixationPointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, valFixationPointX]);
-                arrayFixationPointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPy, valFixationPointY]);
-                arrayGazePointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, parseInt(stimuliArray[i][tableHeader.numberGazePointX])]);
-                arrayGazePointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPy, parseInt(stimuliArray[i][tableHeader.numberGazePointY])]);
+
+                arrayAmplitudeX.push([time, refValForAmplitudeX, valSaccadeAmplitudeX]);
+                arrayFixationPointX.push([time, refValForPx, valFixationPointX, errorVal]);
+                arrayFixationPointY.push([time, refValForPy, valFixationPointY]);
+                arrayGazePointX.push([time, refValForPx, parseInt(stimuliArray[i][tableHeader.numberGazePointX])]);
+                arrayGazePointY.push([time, refValForPy, parseInt(stimuliArray[i][tableHeader.numberGazePointY])]);
                 initial = false;
             }
         }
