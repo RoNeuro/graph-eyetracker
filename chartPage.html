@@ -33,32 +33,34 @@
                 <button class="button1" onclick="window.location.reload();">Home</button>
                 <label for="files" class="button2">Import</label>
                 <button class="button3">Istoric</button>
-
             </div>
+
             <input type="file" id="files" name="file" style="display:none;" />
-            <div id="patient-data"></div>
-            <div id="generateContainer" style="display:none;">
+            
+            <div id="generateContainer">
+                <div id="patientDataContainer">
+                    <div id="patientData"></div>
+                </div>
                 <div id="importInfo"></div>
-                <button class="generateButton" onclick="loadGif();">Generate Chart</button>
-            </div>
-
-            <div id="loadingImage" hidden>
-                <span>Charts are loading!</span>
-                <div class="lds-css ng-scope">
-                    <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                <!-- <button class="generateButton" onclick="loadGif();">Generate Chart</button> -->
+                <div id="loadingImage">
+<!--                     <span>Charts are loading!</span>
+                    <div class="lds-css ng-scope">
+                        <div class="lds-spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
 
