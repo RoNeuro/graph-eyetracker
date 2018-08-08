@@ -24,7 +24,7 @@ function errorHandler(evt) {
 }
 
 function handleFileSelect(evt) {
-    clearDivs()
+    clearDivs();
     arrayAmplitudeX = [];
     arrayFixationPointX = [];
     arrayFixationPointY = [];
@@ -106,11 +106,11 @@ function handleFileSelect(evt) {
                 }
                 if (parseInt(stimuliArray[i][tableHeader.numberFixationPointX]) < initialFixationPointX) {
                     initialSaccadicAmplitude -= floatSaccadicAmplitude;
-                    initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
+                    initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2));
                     initialFixationPointX = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                 } else if (parseInt(stimuliArray[i][tableHeader.numberFixationPointX]) > initialFixationPointX) {
                     initialSaccadicAmplitude += floatSaccadicAmplitude;
-                    initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
+                    initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2));
                     initialFixationPointX = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                 }
 
@@ -159,23 +159,17 @@ function removeGif() {
 }
 
 function showChart() {
-    if (scanTypeFromFile == fieldHorizontalSaccade){
-        graphContainer.innerHTML = '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
-        generateChartAmplitudeX(arrayAmplitudeX);
-        generateChartFixedPointX(arrayFixationPointX);
-        generateChartGazePointX(arrayGazePointX);
-    }
-    else if (scanTypeFromFile == fieldVerticalSaccade){
-        graphContainer.innerHTML = '<div id="gazePointY" class="chartContainer"></div> <div id="fixationPointY" class="chartContainer"></div>';
-        generateChartGazePointY(arrayGazePointY);
-        generateChartFixedPointY(arrayFixationPointY);
-    } else if (scanTypeFromFile == filedAntiSaccade){
-        graphContainer.innerHTML =  '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
-        generateChartAmplitudeX(arrayAmplitudeX);
-        generateChartFixedPointX(arrayFixationPointX);
-        generateChartGazePointX(arrayGazePointX);
+    if (scanTypeFromFile === fieldHorizontalSaccade || scanTypeFromFile === filedAntiSaccade){
+        document.querySelector("#graphContainer").innerHTML = '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
+        generateChart(arrayAmplitudeX,"amplitudeX","Amplitude X");
+        generateChart(arrayFixationPointX,"fixationPointX","Fixation Point X");
+        generateChart(arrayGazePointX,"gazePointX","Gaze Point X");
+    } else if (scanTypeFromFile === fieldVerticalSaccade){
+        document.querySelector("#graphContainer").innerHTML = '<div id="gazePointY" class="chartContainer"></div> <div id="fixationPointY" class="chartContainer"></div>';
+        generateChart(arrayFixationPointY,"fixationPointY","Fixation Point Y");
+        generateChart(arrayGazePointY,"gazePointY","Gaze Point Y");
     } else {
-        graphContainer.innerHTML = '<h3>Momentan pentru acest tip de scanare nu exista grafice</h3>';
+        document.querySelector("#graphContainer").innerHTML = '<h3>Momentan pentru acest tip de scanare nu exista grafice</h3>';
     }
 
     removeGif();
@@ -183,9 +177,8 @@ function showChart() {
 }
 
 function clearDivs() {
-    while (graphContainer.hasChildNodes()) {
-        graphContainer.removeChild(graphContainer.firstChild);
-    }
+    document.querySelector("#graphContainer").innerHTML="";
+    window.charts=[];
 }
 
 function formatMillion(val) {
