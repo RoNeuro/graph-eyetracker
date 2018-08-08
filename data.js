@@ -74,7 +74,7 @@ function handleFileSelect(evt) {
         var numberOfRecords = stimuliArray[0].length * stimuliArray.length;
 
 
-        document.getElementById('patient-data').innerHTML = `
+        document.getElementById('patientData').innerHTML = `
             Patient Name: ${patientName}<br />
             Patient Sex: ${patientSex|| ""}<br />
             Date of scan: ${dateOfRecord}<br />
@@ -82,6 +82,7 @@ function handleFileSelect(evt) {
             Number of Records: <b></b>${formatMillion(numberOfRecords)}</b>
             `;
         document.querySelector("#generateContainer").style.display = "block";
+        generateButton();
 
         for (var i = 0; i < stimuliArray.length; i++) {
             if (stimuliArray[i][tableHeader.numberMediaName] !== "" && stimuliArray[i][tableHeader.numberMediaName] !== undefined && ((stimuliArray[i][tableHeader.numberValidityLeft] == 0 && stimuliArray[i][tableHeader.numberValidityRight] == 0) || (stimuliArray[i][tableHeader.numberValidityLeft] == 4 && stimuliArray[i][tableHeader.numberValidityRight] == 4))) {
@@ -125,15 +126,27 @@ function handleFileSelect(evt) {
     };
     reader.readAsBinaryString(evt.target.files[0]);
 }
+function generateButton(){
+    importInfo.innerHTML = '<button class="generateButton" onclick="loadGif();">Generate Chart</button>';
+}
+
+function removeButton(){
+    importInfo.removeChild(importInfo.firstChild);
+}
 
 function loadGif() {
     console.log("load gif function")
-    document.getElementById("loadingImage").removeAttribute("hidden");
+    // document.getElementById("loadingImage").removeAttribute("hidden");
+    loadingImage.innerHTML = ' <span>Charts are loading!</span> <div class="lds-css ng-scope"> <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>'
     setTimeout(showChart, 10);
 }
 
-function hideGif() {
-    document.getElementById("loadingImage").setAttribute("hidden", "");
+function removeGif() {
+    console.log("remove gif");
+    while (loadingImage.hasChildNodes()) {
+        loadingImage.removeChild(loadingImage.firstChild);
+    }
+    // document.getElementById("loadingImage").setAttribute("hidden", "");
 }
 
 function showChart() {
@@ -141,7 +154,8 @@ function showChart() {
     generateFixedChartData(arrayFixationPointX);
     generateGazePointX(arrayGazePointX);
     generateGazePointY(arrayGazePointY);
-    hideGif();
+    removeGif();
+    removeButton();
 }
 
 function clearDivs() {

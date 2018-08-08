@@ -45,9 +45,9 @@ body{
   width: 200px;
   border-radius: 25px;
   height: 30;
-  position: relative;
+  /*position: relative;*/
 /*  margin-left: 550px;*/
-  margin-top: -50px;
+  /*margin-top: -50px;*/
   font-size: 20;
   display: block;
   margin-left: auto;
