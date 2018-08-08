@@ -25,6 +25,9 @@ function errorHandler(evt) {
 
 function handleFileSelect(evt) {
     clearDivs();
+    if(evt.target.files.length===0){
+        return;
+    }
     arrayAmplitudeX = [];
     arrayFixationPointX = [];
     arrayFixationPointY = [];
@@ -159,15 +162,20 @@ function removeGif() {
 }
 
 function showChart() {
-    if (scanTypeFromFile === fieldHorizontalSaccade || scanTypeFromFile === filedAntiSaccade){
+    if (scanTypeFromFile === fieldHorizontalSaccade){
+        document.querySelector("#graphContainer").innerHTML = '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
+        generateChart(arrayAmplitudeX,"amplitudeX","Amplitude X");
+        generateChart(arrayFixationPointX,"fixationPointX","Fixation Point X");
+        generateChart(arrayGazePointX,"gazePointX","Gaze Point X");
+    } else if (scanTypeFromFile === filedAntiSaccade){
         document.querySelector("#graphContainer").innerHTML = '<div id="gazePointX" class="chartContainer"></div> <div id="fixationPointX" class="chartContainer"></div> <div id="amplitudeX" class="chartContainer"></div>';
         generateChart(arrayAmplitudeX,"amplitudeX","Amplitude X");
         generateChart(arrayFixationPointX,"fixationPointX","Fixation Point X");
         generateChart(arrayGazePointX,"gazePointX","Gaze Point X");
     } else if (scanTypeFromFile === fieldVerticalSaccade){
         document.querySelector("#graphContainer").innerHTML = '<div id="gazePointY" class="chartContainer"></div> <div id="fixationPointY" class="chartContainer"></div>';
-        generateChart(arrayFixationPointY,"fixationPointY","Fixation Point Y");
-        generateChart(arrayGazePointY,"gazePointY","Gaze Point Y");
+        generateChartY(arrayFixationPointY,"fixationPointY","Fixation Point Y");
+        generateChartY(arrayGazePointY,"gazePointY","Gaze Point Y");
     } else {
         document.querySelector("#graphContainer").innerHTML = '<h3>Momentan pentru acest tip de scanare nu exista grafice</h3>';
     }
