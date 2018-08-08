@@ -193,7 +193,11 @@ footer{
 }
 
 #loadingImage{
-  margin-top: 50px;
+  display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top:50px;
 }
 
 
@@ -308,5 +312,4 @@ lds-spinner {
   height: 100px !important;
   -webkit-transform: translate(-50px, -50px) scale(0.5) translate(50px, 50px);
   transform: translate(-50px, -50px) scale(0.5) translate(50px, 50px);
->>>>>>> 1db301d40ff51e1ce8269a23fee3c2dabbe6af84
 }
