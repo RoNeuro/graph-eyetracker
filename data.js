@@ -58,11 +58,16 @@ function handleFileSelect(evt) {
         console.log(tableHeader.numberMediaName, tableHeader.numberRecordingTimestamp, tableHeader.numberFixationPointX, tableHeader.numberSaccadicAmplitude, tableHeader.numberValidityLeft, tableHeader.numberValidityRight);
 
 
-        var initialMediaName = 0;
         var initialFixationPoint = 0;
         var initialSaccadicAmplitude = 0.0;
-        var numberFromMediaName;
-        var refValForPx = 0;
+        var refValForAmplitudeX = fileStimuli[fileStimulusCenter].amplitude;
+        var refValForPx = fileStimuli[fileStimulusCenter].positionDegreeX;
+        var refValForPy = fileStimuli[fileStimulusCenter].positionDegreeY;
+        var savedPx = refValForPx;
+        var savedPy = refValForPy;
+        var savedAmplitudeX = refValForAmplitudeX;
+        console.log("refvalForPx is: ", refValForPx, "refvalforpY is: ", refValForPy);
+        console.log("refValForAmplitudeX is: ", refValForAmplitudeX);
         var initial = true;
         scanTypeFromFile = stimuliArray[1][header[fieldStudioTestName]];
 
@@ -88,15 +93,16 @@ function handleFileSelect(evt) {
             if (stimuliArray[i][tableHeader.numberMediaName] !== "" && stimuliArray[i][tableHeader.numberMediaName] !== undefined && ((stimuliArray[i][tableHeader.numberValidityLeft] == 0 && stimuliArray[i][tableHeader.numberValidityRight] == 0) || (stimuliArray[i][tableHeader.numberValidityLeft] == 4 && stimuliArray[i][tableHeader.numberValidityRight] == 4))) {
                 //Media Name Number
                 if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusBlack) {
-                    numberFromMediaName = initialMediaName;
-                } else if (stimuliArray[i][tableHeader.numberMediaName] === fileStimulusCenter) {
-                    numberFromMediaName = 0;
-                    initialMediaName = numberFromMediaName;
-                    refValForPx = fileStimuli[fileStimulusCenter].positionDegreeX;
-                } else {
-                    numberFromMediaName = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].value;
-                    initialMediaName = numberFromMediaName;
+                    refValForAmplitudeX = savedAmplitudeX;
+                    refValForPx = savedPx;
+                    refValForPy = savedPy;
+                 } else {
+                    refValForAmplitudeX = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].amplitude;
+                    savedAmplitudeX = refValForAmplitudeX;
                     refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
+                    savedPx = refValForPx;
+                    refValForPy = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeY;
+                    savedPy = refValForPy;
                 }
                 //Saccadic Amplitude Number
                 var floatSaccadicAmplitude = parseFloat(stimuliArray[i][tableHeader.numberSaccadicAmplitude].replace(",", "."));
@@ -115,7 +121,7 @@ function handleFileSelect(evt) {
                     initialSaccadicAmplitude = parseFloat(initialSaccadicAmplitude.toFixed(2))
                     initialFixationPoint = parseInt(stimuliArray[i][tableHeader.numberFixationPointX]);
                 }
-                arrayForGraph.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), numberFromMediaName, initialSaccadicAmplitude]);
+                arrayForGraph.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForAmplitudeX, initialSaccadicAmplitude]);
                 arrayFixationPointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, initialFixationPoint]);
                 arrayGazePointX.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), refValForPx, parseInt(stimuliArray[i][tableHeader.numberGazePointX])]);
                 arrayGazePointY.push([parseInt(stimuliArray[i][tableHeader.numberRecordingTimestamp]), 540, parseInt(stimuliArray[i][tableHeader.numberGazePointY])]);

@@ -28,40 +28,40 @@ var fieldPatientName = "ParticipantName",
 
     fileStimuli = {
         'O.bmp': {
-            value: 0,
+            amplitude: 0,
             positionDegreeX: 960,
             positionDegreeY: 540,
         },
         'black.bmp': {
-            value: 0,
+            amplitude: 0,
         },
         'O(+10).bmp': {
-            value: 10,
+            amplitude: 10,
             positionDegreeX: 1384,
             positionDegreeY: 540,
         },
         'O(+18).bmp': {
-            value: 18,
+            amplitude: 18,
             positionDegreeX: 1771,
             positionDegreeY: 540,
         },
         'O(-10).bmp': {
-            value: -10,
+            amplitude: -10,
             positionDegreeX: 534,
             positionDegreeY: 540,
         },
         'O(-18).bmp': {
-            value: -18,
+            amplitude: -18,
             positionDegreeX: 148,
             positionDegreeY: 540,
         },
         'O-(+8).bmp': {
-            value: 8,
+            amplitude: 8,
             positionDegreeX: 960,
             positionDegreeY: 188,
         },
         'O-(-8).bmp': {
-            value: -8,
+            amplitude: -8,
             positionDegreeX: 960,
             positionDegreeY: 891,
         }
