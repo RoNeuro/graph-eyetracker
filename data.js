@@ -96,7 +96,7 @@ function handleFileSelect(evt) {
                 } else {
                     numberFromMediaName = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].value;
                     initialMediaName = numberFromMediaName;
-                    refValForPx = fileStimuli[stimuliArray[i][tableHeader.numberMediaName]].positionDegreeX;
+                    refValForPx = fileStimuli[fileStimulusCenter].positionDegreeX;
                 }
                 //Saccadic Amplitude Number
                 var floatSaccadicAmplitude = parseFloat(stimuliArray[i][tableHeader.numberSaccadicAmplitude].replace(",", "."));
